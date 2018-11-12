@@ -14,9 +14,15 @@ int AtividadeDePrazoFixo::getCusto(){
 }
 
 int AtividadeDePrazoFixo::getDuracao(){
-
+    if (terminado)
+        return duracaoReal;
+    else
+        return dias;
 }
 
-int AtividadeDePrazoFixo::getPrazo(){
-
+int AtividadeDePrazoFixo::getPrazo(){ // NÃO SEI DIFERENCIAR DE getDuracao
+    if (terminado)
+        return duracaoReal;
+    else
+        return dias;
 }

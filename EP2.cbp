@@ -13,6 +13,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -22,6 +23,7 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add directory="include" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -32,13 +34,21 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Atividade.cpp" />
+		<Unit filename="Atividade.h" />
+		<Unit filename="AtividadeDeEsforcoFixo.cpp" />
+		<Unit filename="AtividadeDeEsforcoFixo.h" />
+		<Unit filename="AtividadeDePrazoFixo.cpp" />
+		<Unit filename="AtividadeDePrazoFixo.h" />
 		<Unit filename="Ferramenta.cpp" />
 		<Unit filename="Ferramenta.h" />
 		<Unit filename="Pessoa.cpp" />
 		<Unit filename="Pessoa.h" />
 		<Unit filename="Recurso.cpp" />
 		<Unit filename="Recurso.h" />
+		<Unit filename="include/Projeto.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/Projeto.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

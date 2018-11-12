@@ -2,7 +2,7 @@
 #define ATIVIDADE_H
 #include <string>
 #include <iostream>
-#include "Recursos.h"
+#include "Recurso.h"
 
 using namespace std;
 
@@ -32,6 +32,7 @@ protected:
     int duracaoReal;
     Recurso* recursos[MAXIMO_RECURSOS];
     int quantidadeDeRecursos;
+    bool terminada;
 
 };
 #endif
