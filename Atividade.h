@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Recurso.h"
 
+
 using namespace std;
 
 class Atividade{
@@ -30,10 +31,11 @@ public:
 protected:
     string nome;
     int duracaoReal;
-    Recurso* recursos[MAXIMO_RECURSOS];
+    Recurso* recursos[MAX_RECURSOS];
     int quantidadeDeRecursos;
     bool terminada;
 
 };
+
 #endif
 

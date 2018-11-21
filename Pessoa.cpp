@@ -65,3 +65,9 @@ double Pessoa::getValorPorHoraPadrao()
 {
     return Pessoa::valorPorHoraPadrao;
 }
+bool Pessoa::isPessoa()
+{
+    return true;
+}
+
+

@@ -1,28 +1,29 @@
 #include "AtividadeDeEsforcoFixo.h"
 
-AtividadeDeEsforco::AtividadeDeEsforçoFixo(string nome, int horasNecessarias) : nome(nome), horasNecessarias(horasNecessarias){
+AtividadeDeEsforcoFixo::AtividadeDeEsforcoFixo(string nome, int horasNecessarias) :
+    nome(nome), horasNecessarias(horasNecessarias){
     if (horasNecessarias <= 0)
-        throw new invalid_argument("horas menor que 0")
+        throw new invalid_argument("horas menor que 0");
 }
 
 AtividadeDeEsforcoFixo::~AtividadeDeEsforcoFixo(){
     cout << "deletado" << endl;
 }
-int AtividadeDeEsforcoFixo::getCusto(){
+double AtividadeDeEsforcoFixo::getCusto() {
     double custo = 0;
-    for (i=0; i<getQuantidadeDeRecursos(); i++){
+    for (int i=0; i<getQuantidadeDeRecursos(); i++){
             custo = custo + recursos[i]->getCusto();
         }
     return getDuracao() * custo;
 }
 int AtividadeDeEsforcoFixo::getDuracao(){ // TEM QUE USAR PESSOAS E N RECURSOS DA PRA COLOCAR UM IF RECURSO=PESSOA?
-    if (terminada){
+    if (terminada)
         return this->duracaoReal;
-    else
-        int i;
+    else {
         double horasPessoas = 0;
-        for (i=0; i<getQuantidadeDeRecursos(); i++){
-            horasRecurso = horasRecurso + recursos[i]->getHorasDiarias();
+        for (int i=0; i<getQuantidadeDeRecursos(); i++){
+            if(recursos[i]->ehPessoa())
+                horasPessoas = horasPessoas + recursos[i]->getHorasDiarias();
         }
         return getHorasNecessarias();
     }

@@ -2,9 +2,12 @@
 #include <iostream>
 #include <string.h>
 
+using namespace std;
+
 class Recurso {
 private:
     string nome;
+    virtual bool ehPessoa()=0;
 public:
     Recurso(string nome);
     virtual ~Recurso();

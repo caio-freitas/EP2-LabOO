@@ -1,4 +1,5 @@
 #include "Recurso.h"
+
 using namespace std;
 
 
@@ -8,6 +9,7 @@ private:
     int horasDiarias;
     static double valorPorHoraPadrao;
     bool recebePadrao;
+    bool ehPessoa();
 
 public:
     Pessoa(string nome, double valorPorHora, int horasDiarias);

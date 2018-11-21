@@ -1,18 +1,18 @@
 #include "Atividade.h"
 
 Atividade::Atividade (string nome) : nome(nome){
-    this->quantidadeDeRecusos = 0;
-    this->terminada = false
+    this->quantidadeDeRecursos = 0;
+    this->terminada = false;
 }
 
-Ãtividade::~Atividade{
+Atividade::~Atividade(){
     cout << "deletada" << endl;
 }
 
-void Atividade::adicionar (Recurso r*){
-    if (getQuantidadeRecursos() > MAXIMO_RECURSOS)
+void Atividade::adicionar(Recurso *r){
+    if (this->getQuantidadeDeRecursos() > MAX_RECURSOS)
         throw new overflow_error("Ultrapassou limite de recursos");
-    recurso[getQuantidadeDeRecursos()] = r;
+    recursos[this->getQuantidadeDeRecursos()] = r;
     quantidadeDeRecursos++;
 }
 
