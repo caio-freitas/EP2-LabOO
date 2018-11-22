@@ -7,7 +7,7 @@ class Pessoa : public Recurso{
 private:
     double valorPorHora;
     int horasDiarias;
-    static double valorPorHoraPadrao;
+    static double valorPorHoraPadrao = 10;
     bool recebePadrao;
     bool ehPessoa();
 
@@ -22,5 +22,7 @@ public:
 
     static void setValorPorHoraPadrao(double valor);
     static double getValorPorHoraPadrao();
+
     double getCusto();
+    virtual void imprimir();
 };

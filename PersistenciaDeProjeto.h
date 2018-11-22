@@ -10,5 +10,5 @@ public:
     Projeto* carregar(string arquivo);
     void salvar(Projeto* p, string arquivo);
 protected:
-
+    string arquivo;
 }

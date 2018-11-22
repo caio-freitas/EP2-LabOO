@@ -40,17 +40,19 @@
 		<Unit filename="AtividadeDeEsforcoFixo.h" />
 		<Unit filename="AtividadeDePrazoFixo.cpp" />
 		<Unit filename="AtividadeDePrazoFixo.h" />
+		<Unit filename="ErroDeArquivo.cpp" />
+		<Unit filename="ErroDeArquivo.h" />
 		<Unit filename="Ferramenta.cpp" />
 		<Unit filename="Ferramenta.h" />
 		<Unit filename="PersistenciaDeProjeto.cpp" />
 		<Unit filename="PersistenciaDeProjeto.h" />
 		<Unit filename="Pessoa.cpp" />
 		<Unit filename="Pessoa.h" />
+		<Unit filename="Projeto.cpp" />
+		<Unit filename="Projeto.h" />
 		<Unit filename="Recurso.cpp" />
 		<Unit filename="Recurso.h" />
-		<Unit filename="include/Projeto.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Projeto.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

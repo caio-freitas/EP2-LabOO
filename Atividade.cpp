@@ -20,6 +20,14 @@ int Atividade::getQuantidadeDeRecursos(){
     return this->quantidadeDeRecursos;
 }
 
+double Atividade::getCusto() {
+    double custo = 0;
+    for (int i=0; i<getQuantidadeDeRecursos(); i++){
+            custo = custo + recursos[i]->getCusto(getDuracao());
+        }
+    return getDuracao() * custo;
+}
+
  Recurso** Atividade::getRecursos(){
     return recursos;
  }

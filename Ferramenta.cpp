@@ -1,8 +1,11 @@
 #include "Ferramenta.h"
 
 Ferramenta::Ferramenta(string nome, double custoDiario):
-    nome(nome), custoDiario(custoDiario)
-{}
+    Recurso(nome), custoDiario(custoDiario)
+{
+    if (custoDiario<=0)
+        throw new invalid_argument("custoDiario menor ou igual a 0");
+}
 
 Ferramenta::~Ferramenta()
 {
@@ -15,12 +18,13 @@ double Ferramenta::getCustoDiario()
 }
 
 void Ferramenta::imprimir() {
-    cout << "Ferramenta: ";
-    Recurso::imprimir();
+    cout << "Ferramenta: " << this->nome << " - R$" << this->getCusto() << " por dia" << endl;
 }
 
-double Ferramenta::getCusto() {
-    return this->custoDiario;
+double Ferramenta::getCusto(int dias) {
+    if (dias <= 0)
+        throw new invalid_argument("dias menor ou igual a 0");
+    return this->custoDiario * dias;
 }
 bool Ferramenta::ehPessoa()
 {

@@ -1,6 +1,6 @@
 #include "AtividadeDePrazoFixo.h"
 
-AtividadeDePrazoFixo::AtividadeDePrazoFixo(string nome, int dias) : nome(nome), dias(dias){
+AtividadeDePrazoFixo::AtividadeDePrazoFixo(string nome, int dias) : Atividade(nome), dias(dias){
     if (dias <= 0)
         throw new invalid_argument("dias menor que 0");
 }
@@ -21,9 +21,6 @@ int AtividadeDePrazoFixo::getDuracao(){
 }
 
 int AtividadeDePrazoFixo::getPrazo(){ // NÃO SEI DIFERENCIAR DE getDuracao
-    if (terminado)
-        return duracaoReal;
-    else
         return dias;
 }
 

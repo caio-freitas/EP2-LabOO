@@ -1,7 +1,7 @@
 #include "Pessoa.h"
 
 Pessoa::Pessoa(string nome, double valorPorHora, int horasDiarias):
-  nome(nome), horasDiarias(horasDiarias){
+  Recurso(nome), horasDiarias(horasDiarias){
       if(valorPorHora<=0||horasDiarias<=0) {
         throw new invalid_argument("Erro: Valor por Hora e Horas Diárias devem ser valores positivos!");
         /**
@@ -41,11 +41,13 @@ int Pessoa::getHorasDiarias(){
 }
 
 double Pessoa::getCusto(int dias){
-    return this->horasDiarias * this->valorPorHora * this->dias;/** De onde sai o tal "dias"? **/
+    if (dias <= 0)
+        throw new invalid_argument("dias menor ou igual a 0");
+    return this->horasDiarias * this->valorPorHora * this->dias;
 }
 
 void Pessoa::imprimir(){
-    cout << "Pessoa: " << valorPorHora << " - " << horasDiarias << "h por dia" << endl;
+    cout << "Pessoa: " << getNome() << " - R$"<< valorPorHora << " - " << horasDiarias << "h por dia" << endl;
 }
 
 bool Pessoa::recebeValorPadrao()

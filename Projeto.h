@@ -26,6 +26,8 @@ public:
 protected:
     vector<Atividade*>* atividades = new vector<Atividade*>();
     list<Recursos*>* recursos = new list<Recurso*>();
+    string nome;
+    bool terminadas;
 };
 
 #endif // PROJETO_H

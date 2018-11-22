@@ -7,7 +7,7 @@ class AtividadeDePrazoFixo : public Atividade{
 public:
     AtividadeDePrazoFixo(string nome, int dias);
     virtual ~AtividadeDePrazoFixo();
-    virtual int getCusto();
+
     virtual int getDuracao();
     virtual int getPrazo();
 

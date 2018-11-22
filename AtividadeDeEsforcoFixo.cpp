@@ -9,23 +9,17 @@ AtividadeDeEsforcoFixo::AtividadeDeEsforcoFixo(string nome, int horasNecessarias
 AtividadeDeEsforcoFixo::~AtividadeDeEsforcoFixo(){
     cout << "deletado" << endl;
 }
-double AtividadeDeEsforcoFixo::getCusto() {
-    double custo = 0;
-    for (int i=0; i<getQuantidadeDeRecursos(); i++){
-            custo = custo + recursos[i]->getCusto();
-        }
-    return getDuracao() * custo;
-}
-int AtividadeDeEsforcoFixo::getDuracao(){ // TEM QUE USAR PESSOAS E N RECURSOS DA PRA COLOCAR UM IF RECURSO=PESSOA?
+
+int AtividadeDeEsforcoFixo::getDuracao(){ // PRECISA ARRUMAR, EHPESSOA EH PROTCED E DA RUIM, N DA PRA CHAMAR GETHORASDIARIAS
     if (terminada)
         return this->duracaoReal;
     else {
         double horasPessoas = 0;
         for (int i=0; i<getQuantidadeDeRecursos(); i++){
             if(recursos[i]->ehPessoa())
-                horasPessoas = horasPessoas + recursos[i]->getHorasDiarias();
+                horasPessoas = horasPessoas + recurso[i]->getHorasDiarias();
         }
-        return getHorasNecessarias();
+        return getHorasNecessarias()/horasPessoas   ;
     }
 }
 int AtividadeDeEsforcoFixo::getHorasNecessarias(){

@@ -20,7 +20,7 @@ public:
     virtual int getQuantidadeDeRecursos();
 
     virtual int getDuracao() = 0;
-    virtual double getCusto() = 0;
+    virtual double getCusto();
 
     virtual void terminar(int duracaoReal);
     virtual bool estaTerminada();

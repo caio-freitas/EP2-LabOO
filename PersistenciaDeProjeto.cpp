@@ -12,6 +12,8 @@ Projeto* PersitenciaDeProjeto::carregar(string arquivo)
 {
     ifstream imput;
     imput.open (arquivo);
+    if (arquivo == NULL)
+        throw new ErroDeArquivo;
     int numeroRecursos, i, j, k, custoF, valorP, horasP, numeroAtividades, horasE, duracaoE, rucursosAtividade, prazo, duracaoPr;
     string nome, FouP, TouN, nomeF, nomeP, nomeE, nomeRecurso, nomePr;
     input >> nome;
@@ -21,7 +23,7 @@ Projeto* PersitenciaDeProjeto::carregar(string arquivo)
         input >> FouP; // le se é ferramenta ou pessoa
         if (FouP == "F"){
             input >> nomeF; // nome da ferramenta
-            input >> custoF; // cuso diario da ferramenta
+            input >> custoF; // custo diario da ferramenta
             new Ferramenta* f = New Ferramenta(nomeF, custoF);
             recursos->push_back(f);
         else

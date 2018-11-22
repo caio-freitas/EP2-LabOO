@@ -8,11 +8,12 @@ class Recurso {
 protected:
     string nome;
     virtual bool ehPessoa()=0;
+
 public:
     Recurso(string nome);
     virtual ~Recurso();
 
     virtual string getNome();
-    virtual double getCusto(int dias);
-    virtual void imprimir();
+    virtual double getCusto(int dias)=0;
+    virtual void imprimir()=0;
 };

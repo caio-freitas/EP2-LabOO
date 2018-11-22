@@ -6,12 +6,13 @@ class Ferramenta : public Recurso{
 private:
     double custoDiario;
     bool ehPessoa();
+    virtual bool ehPessoa();
 
 public:
     Ferramenta(string nome, double custoDiario);
     virtual ~Ferramenta();
 
     virtual double getCustoDiario();
-    void imprimir();
-    double getCusto();
+    virtual void imprimir();
+    double getCusto(int dias);
 };

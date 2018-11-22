@@ -9,7 +9,7 @@ public:
     AtividadeDeEsforcoFixo(string nome, int horasNecessarias);
     virtual ~AtividadeDeEsforcoFixo();
     virtual int getHorasNecessarias();
-    virtual double getCusto();
+
     virtual int getDuracao();
 
 
