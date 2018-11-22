@@ -5,7 +5,7 @@
 using namespace std;
 
 class Recurso {
-private:
+protected:
     string nome;
     virtual bool ehPessoa()=0;
 public:

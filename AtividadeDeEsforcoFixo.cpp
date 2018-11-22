@@ -1,7 +1,7 @@
 #include "AtividadeDeEsforcoFixo.h"
 
 AtividadeDeEsforcoFixo::AtividadeDeEsforcoFixo(string nome, int horasNecessarias) :
-    nome(nome), horasNecessarias(horasNecessarias){
+    Atividade(nome), horasNecessarias(horasNecessarias){
     if (horasNecessarias <= 0)
         throw new invalid_argument("horas menor que 0");
 }
@@ -32,5 +32,6 @@ int AtividadeDeEsforcoFixo::getHorasNecessarias(){
     return this-> horasNecessarias;
 }
 
-
-
+bool AtividadeDeEsforcoFixo::ehPrazoFixo(){
+    return false;
+}

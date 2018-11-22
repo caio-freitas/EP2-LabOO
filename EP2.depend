@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1542809156 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.cpp
+	"Atividade.h"
+
+1542899740 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.h
+	<string>
+	<iostream>
+	"Recurso.h"
+
+1542897994 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\recurso.h
+	<stdexcept>
+	<iostream>
+	<string.h>
+

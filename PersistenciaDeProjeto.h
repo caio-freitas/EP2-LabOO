@@ -1,15 +1,14 @@
 #include "Projeto.h"
 #include <fstream>
 
-#define filename oi.txt
 
-ifstream inputfile;
-ofstream outputfile;
+class PersistenciaDeProjeto(){
+public:
+    PersitenciaDeProjeto();
+    ~virtual PersistenciaDeProjeto();
 
-inputfile.open(filename);
-outputfile.open(filename);
+    Projeto* carregar(string arquivo);
+    void salvar(Projeto* p, string arquivo);
+protected:
 
-inputfile >> "oi";
-
-inputfile.close();
-outputfile.close();
+}

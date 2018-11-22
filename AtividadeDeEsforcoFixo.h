@@ -16,6 +16,7 @@ public:
 protected:
     string nome;
     int horasNecessarias;
+    virtual bool ehPrazoFixo();
 
 
 };

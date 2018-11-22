@@ -26,3 +26,7 @@ int AtividadeDePrazoFixo::getPrazo(){ // NÃO SEI DIFERENCIAR DE getDuracao
     else
         return dias;
 }
+
+bool AtividadeDePrazoFixo::ehPrazoFixo(){
+    return true
+}
