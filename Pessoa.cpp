@@ -1,7 +1,13 @@
 #include "Pessoa.h"
 
 Pessoa::Pessoa(string nome, double valorPorHora, int horasDiarias):
-  nome(nome), valorPorHora(valorPorHora), horasDiarias(horasDiarias){
+  nome(nome), horasDiarias(horasDiarias){
+      if(valorPorHora<=0||horasDiarias<=0) {
+        throw new invalid_argument("Erro: Valor por Hora e Horas Diárias devem ser valores positivos!");
+        /**
+        Precisamos de um Catch na função main
+                                            **/
+      }
       this->recebePadrao = false;
 }
 
@@ -34,9 +40,9 @@ int Pessoa::getHorasDiarias(){
     return horasDiarias;
 }
 
-/*double Pessoa::getCusto(int dias){
-    return this->horasDiarias * this->valorPorHora;
-}*/
+double Pessoa::getCusto(int dias){
+    return this->horasDiarias * this->valorPorHora * this->dias;/** De onde sai o tal "dias"? **/
+}
 
 void Pessoa::imprimir(){
     cout << "Pessoa: " << valorPorHora << " - " << horasDiarias << "h por dia" << endl;
