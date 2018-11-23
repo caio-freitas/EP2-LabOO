@@ -48,7 +48,7 @@ int main()
             if (opcao==1) {
                     /** Menu para Adicionar Recursos **/
                 string nome;
-                int valor, horas;
+                int valor, horas, custo;
                 cout << "Ferramenta (f) ou Pessoa (p): ";
                 cin >> resposta;
                 if(resposta=='p') {
@@ -77,6 +77,19 @@ int main()
                         catch(logic_error *e) {
                             cout << "Erro: " << e->what();
                         }
+                    }
+                }
+                if (resposta=='f'){
+                    cout << "Nome: ";
+                    cin >> nome;
+                    cout << "Custo diario: ";
+                    cin >> custo;
+                    Ferramenta* ferr = new Ferramenta(nome, custo);
+                    try {
+                        proj->adicionar(ferr);
+                    }
+                    catch(logic_error *e) {
+                        cout << "Erro: " << e->what();
                     }
                 }
             }
@@ -111,9 +124,11 @@ int main()
                     option = 1;
                     while (ans=='s'&& option != 0) {
                         list<Recurso*>::iterator i = proj->getRecursos()->begin();
+                        int cont = 1;
                         while(i != proj->getRecursos()->end()) {
-                            cout << (*i)+1 << " - ";
+                            cout << cont << " - ";
                             (*i)->imprimir();
+                            cont ++;
                             i++;
                         }
                         cout << "Escolha um recurso ou 0 para cancelar: ";
