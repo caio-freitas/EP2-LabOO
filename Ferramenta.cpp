@@ -18,15 +18,11 @@ double Ferramenta::getCustoDiario()
 }
 
 void Ferramenta::imprimir() {
-    cout << "Ferramenta: " << this->nome << " - R$" << this->getCusto() << " por dia" << endl;
+    cout << "Ferramenta: " << this->nome << " - R$" << this->getCusto(1) << " por dia" << endl;
 }
 
 double Ferramenta::getCusto(int dias) {
     if (dias <= 0)
         throw new invalid_argument("dias menor ou igual a 0");
     return this->custoDiario * dias;
-}
-bool Ferramenta::ehPessoa()
-{
-    return false;
 }

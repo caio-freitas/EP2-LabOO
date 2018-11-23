@@ -16,6 +16,11 @@ void Atividade::adicionar(Recurso *r){
     quantidadeDeRecursos++;
 }
 
+string Atividade::getNome()
+ {
+     return this->nome;
+ }
+
 int Atividade::getQuantidadeDeRecursos(){
     return this->quantidadeDeRecursos;
 }
@@ -34,7 +39,7 @@ double Atividade::getCusto() {
 
  void Atividade::terminar(int duracaoReal){
     if (duracaoReal <= 0)
-        throw new invalid_argument("duracaoReal menor que 0");
+        throw new invalid_argument("duracao real menor que 0");
     this->terminada = true;
  }
 
@@ -48,3 +53,4 @@ double Atividade::getCusto() {
  void Atividade::imprimir(){
     cout << this->nome << " - " << getDuracao() << " dias - R$" << getCusto() << endl;
  }
+

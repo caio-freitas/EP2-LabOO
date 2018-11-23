@@ -1,24 +1,39 @@
 #include <iostream>
+#include <iterator>
+#include "Projeto.h"
 #include "Recurso.h"
 #include "Pessoa.h"
 #include "Ferramenta.h"
 #include "Atividade.h"
+#include "AtividadeDeEsforcoFixo.h"
+#include "AtividadeDePrazoFixo.h"
+#include "PersistenciaDeProjeto.h"
 
 using namespace std;
 
 int main()
 {
+    PersistenciaDeProjeto* persistencia = new PersistenciaDeProjeto();
     Pessoa::setValorPorHoraPadrao(10);
-    /********************* EP1 **********************/
+    /*********************  **********************/
     string nomeProjeto;
     int opcao;
     char resposta;
     cout << "Deseja carregar um novo projeto (s/n)?";
     cin >> resposta;
-    cout << "Digite o nome do Projeto:  ";
-    cin >> nomeProjeto;
+    Projeto* proj = new Projeto("name");
     if(resposta=='n') {
-        Projeto* proj = new Projeto(nomeProjeto);
+        cout << "Digite o nome do Projeto:  ";
+        cin >> nomeProjeto;
+        proj = new Projeto(nomeProjeto);
+    }
+    else if (resposta=='s') {
+        string filename;
+        cout << "Digite o nome do arquivo: ";
+        cin >> filename;
+        proj = persistencia->carregar(filename);
+    }
+    if(resposta=='n') {
         do{
                 /** Menu do Projeto **/
             cout << "1 - Adicionar recurso" << endl;
@@ -47,14 +62,20 @@ int main()
                         cout << "Valor por hora (em R$): ";
                         cin >> valor;
                         Pessoa* pers = new Pessoa(nome, valor, horas);
-                        if (!proj->adicionarRecurso(pers)) {
-                            cout << "Nao eh possivel adicionar uma nova pessoa" << endl;
+                        try {
+                            proj->adicionar(pers);
+                        }
+                        catch(logic_error *e) {
+                            cout << "Erro: " << e->what();
                         }
                     }
                     else if (resposta=='s') {
                         Pessoa* pers = new Pessoa(nome, horas);
-                        if (!proj->adicionarRecurso(pers)) {
-                            cout << "Nao eh possivel adicionar uma nova pessoa" << endl;
+                        try {
+                            proj->adicionar(pers);
+                        }
+                        catch(logic_error *e) {
+                            cout << "Erro: " << e->what();
                         }
                     }
                 }
@@ -64,7 +85,7 @@ int main()
                 string nome;
                 int option;
                 char ans;
-                int horas, i, dias;
+                int horas, dias;
                 cout << "Nome: ";
                 cin >> nome;
                 cout << "Prazo fixo (p) ou trabalho fixo (t)? ";
@@ -72,63 +93,64 @@ int main()
                 if(ans=='t') {
                     cout << "Horas necessarias: ";
                     cin >> horas;
+                    AtividadeDeEsforcoFixo* atividade = new AtividadeDeEsforcoFixo(nome, horas);
+                    proj->adicionar(atividade);
                 }
                 else if (ans=='p') {
                     cout << "Dias necessarios: ";
                     cin >> dias;
+                    AtividadeDePrazoFixo* atividade = new AtividadeDePrazoFixo(nome, dias);
+                    proj->adicionar(atividade);
+
                 }
                 /************************************************************/
                     do{
-                    Atividade* atividade = new Atividade(nome, horas);
                     int resp;
-                    proj->adicionar(atividade);
                     cout << "Deseja adicionar um recurso (s/n): ";
                     cin >> ans;
                     option = 1;
                     while (ans=='s'&& option != 0) {
-                        Recurso** recursos = proj->getRecursos();
-                        list<Recurso*>*::iterator i = recursos->begin();
-                        while(i != recursos->end()) {
-                            cout << *i+1 << " - ";
-                            recursos[i]->imprimir();
+                        list<Recurso*>::iterator i = proj->getRecursos()->begin();
+                        while(i != proj->getRecursos()->end()) {
+                            cout << (*i)+1 << " - ";
+                            (*i)->imprimir();
                             i++;
                         }
                         cout << "Escolha um recurso ou 0 para cancelar: ";
                         cin >> resp;
                         if(resp != 0) {
-                            i = recursos->begin();
-                            while(*i!=resp-1)
+                            i = proj->getRecursos()->begin();
+                            while(distance(proj->getRecursos()->begin(), i) != resp-1)
                                 i++;
-                            if(atividade->adicionar(i) == 0)
-                              cout << "Nao foi possivel adicionar recurso" << endl;
-                            else {
+                            try {
+                            proj->adicionar(*i);
+                            } catch(invalid_argument *e) {
+                                cout << "Erro: " << e->what();
+                            }
+                        }
+                            else
                               cout << "Adicionado a atividade" << endl;
-
-
-                            } while(proj->getQuantidadeDeAtividades()< MAXIMO_ATIVIDADES && ans == 's');
+                        }
+                    } while(proj->getAtividades()->size() < Atividade::MAX_RECURSOS && ans == 's');
 
                     /*****************************************************************************/
-                        }
-                    }
-            //delete atividade;
-                }
             }
+            //delete atividade;
             /** Menu para Terminar Atividade **/
             else if (opcao==3) {
                 int resp, dr;
-                vector<Atividade*> atividades = proj->getAtividades();
-                vector<Atividade*>::iterator i = atividades->begin();
-                while(i != atividades->end()) {
-                    i->imprimir(); /** ISSO TÁ ESTRANHIO... **/
+                //vector<Atividade*> atividades = proj->getAtividades();
+                for(unsigned int i=0; i < proj->getAtividades()->size(); i++) {
+                    proj->getAtividades()->at(i)->imprimir();
                 }
                 cout << "Escolha uma atividade ou 0 para cancelar: ";
                 cin >> resp;
-                if(atividades[resp-1]->estaTerminada)
+                if(proj->getAtividades()->at(resp-1)->estaTerminada())
                     cout << "Atividade ja terminada" << endl;
                 else{
                     cout << "Duracao real: ";
                     cin >> dr;
-                    atividades[resp-1]->terminar(dr);
+                    proj->getAtividades()->at(resp-1)->terminar(dr);
                 }
             }
             /** Imprimir Projeto **/
@@ -145,13 +167,15 @@ int main()
             }
             /** Salvar **/
             else if (opcao==6) {
-                string filname;
+                string filename;
                 cout << "Nome do arquivo: ";
                 cin >> filename;
+                persistencia->salvar(proj, filename);
             }
         } while(opcao!=0);
 
     delete proj;
     return 0;
     /*********************************************************/
+}
 }

@@ -5,7 +5,7 @@ ErroDeArquivo::ErroDeArquivo(string mensagem) : logic_error(mensagem)
 
 }
 
-ErroDeArquivo::~ErroDeArquivo()
+ErroDeArquivo::~ErroDeArquivo() throw()
 {
 
 }

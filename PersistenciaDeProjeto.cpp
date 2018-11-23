@@ -1,112 +1,136 @@
-PersitenciaDeProjeto::PersitenciaDeProjeto()
+#include "PersistenciaDeProjeto.h"
+#include <algorithm>
+
+PersistenciaDeProjeto::PersistenciaDeProjeto()
 {
 
 }
 
-PersitenciaDeProjeto::~PersitenciaDeProjeto()
+PersistenciaDeProjeto::~PersistenciaDeProjeto()
 {
 
 }
 
-Projeto* PersitenciaDeProjeto::carregar(string arquivo)
+Projeto* PersistenciaDeProjeto::carregar(string arquivo)
 {
-    ifstream imput;
-    imput.open (arquivo);
-    if (arquivo == NULL)
-        throw new ErroDeArquivo;
-    int numeroRecursos, i, j, k, custoF, valorP, horasP, numeroAtividades, horasE, duracaoE, rucursosAtividade, prazo, duracaoPr;
-    string nome, FouP, TouN, nomeF, nomeP, nomeE, nomeRecurso, nomePr;
+    ifstream input;
+    input.open (arquivo.c_str());
+    if (input.bad())
+        throw new ErroDeArquivo("Erro de Arquivo");
+    int numeroRecursos, i, j, k, custoF, valorP, horasP, numeroAtividades, horasE, duracaoE, recursosAtividade, prazo, duracaoPr;
+    string nome, FouP, TouN, nomeF, nomeP, nomeE, nomeRecurso, nomePr, EouP;
     input >> nome;
-    new Projeto* p = new Projeto(nome);
+    Projeto* p = new Projeto(nome);
     input >> numeroRecursos; // le o numero de recursos
-    for (i=0; i>numeroRecursos; i++){
+    for (i=0; i<numeroRecursos; i++){
         input >> FouP; // le se é ferramenta ou pessoa
         if (FouP == "F"){
             input >> nomeF; // nome da ferramenta
             input >> custoF; // custo diario da ferramenta
-            new Ferramenta* f = New Ferramenta(nomeF, custoF);
-            recursos->push_back(f);
-        else
+            Ferramenta* f = new Ferramenta(nomeF, custoF);
+            p->getRecursos()->push_back(f);
+        }
+        else if(FouP == "P"){
             input >> nomeP; // nome da pessoa
             input >> valorP; // valor por hora
-            imput >> horasP; // horas diárias
+            input >> horasP; // horas diárias
             if (valorP == -1) // caso o valor por hora seja o padrão
-                valorP = valorPorHoraPadrao;
-            new Pessoa* p = new Pessoa(nomeP, valorP, horasP)
-            recursos->push_back(p);
+                valorP = Pessoa::getValorPorHoraPadrao();
+            Pessoa* pers = new Pessoa(nomeP, valorP, horasP);
+            p->getRecursos()->push_back(pers);
+        }
+    }
     input >> numeroAtividades;
-    for (j=0; j>numeroAtividades; j++){
+    for (j=0; j<numeroAtividades; j++){
         input >> EouP; // le se eh esforço fixo ou prazo fixo
-        if (EouP == 'E')
+        if (EouP == "E"){
             input >> nomeE; // nome da atividade
             input >> horasE; // horas necessarias
-            new AtividadeDeEsforcoFixo* ae = new AtividadeDeEsforcoFixo(nomeE, horasE);
+            AtividadeDeEsforcoFixo* ae = new AtividadeDeEsforcoFixo(nomeE, horasE);
             input >> TouN;// terminada ou n
-            if (TouN == 'T'){
+            if (TouN == "T"){
                 input >> duracaoE; // se terminada, sua duracao
                 ae->terminar(duracaoE);
             }
             input >> recursosAtividade; // numero de recursos da atividade
-            for (k=0; k>recursosAtividade; k++){
+            for (k=0; k < recursosAtividade; k++){
                 input >> nomeRecurso;
-                new Recurso* re = Recurso(nomeRecurso);
-                ae->adicionar(re)
+                list<Recurso*>::iterator it = p->getRecursos()->begin();
+                while (it!= p->getRecursos()->end()) {
+                    if((*it)->getNome() == nomeRecurso)
+                        ae->adicionar((*it));
+                }
             }
-        else
+        }
+        else if(EouP == "P"){
             input >> nomePr;
             input >> prazo;
-            new AtividadeDePrazoFixo* apr = AtividadeDePrazoFixo(nomePr, prazo);
+            AtividadeDePrazoFixo* apr = new AtividadeDePrazoFixo(nomePr, prazo);
             input >> TouN;
-            if (TouN == 'T'){
+            if (TouN == "T"){
                 input >> duracaoPr;
                 apr->terminar(duracaoPr);
             }
             input >> recursosAtividade;
-            for (k=0; k > recursosAtividade; k++){
-                input >> nomeRecurso;
-                new Recurso* rpr = Recurso(nomeRecurso);
-                apr->adicionar(rpr);
-            }
+                list<Recurso*>::iterator it = p->getRecursos()->begin();
+                while (it!= p->getRecursos()->end()) {
+                    if((*it)->getNome() == nomeRecurso)
+                        apr->adicionar((*it));
+                }
+        }
     }
     input.close();
+    return p;
 }
 
-void PersitenciaDeProjeto::salvar(Projeto* p, string arquivo)
+void PersistenciaDeProjeto::salvar(Projeto* p, string arquivo)
 {
     ofstream output;
-    output.open(arquivo);
+    output.open(arquivo.c_str());
     output << p->getNome() << "/n";
-    output << p->recursos->size() << "/n";
-    for (unsigned i=0; i > p->recursos->size(); i++){
-        if (p->recursos->at(i)->ehPessoa()){
-            output << "P " << p->recursos->at(i)->getNome() << " ";
-            if (p->recursos->at(i)->recebeValorPorHoraPadrao())
-                output << getValorPorHoraPadrao();
-            else
-                output << getValorPorHora();
-            output << " " << getHorasDiarias() << "\n";
+    output << p->getRecursos()->size() << "/n";
+    list<Recurso*>::iterator it = p->getRecursos()->begin();
+    for (int i=0; i < p->getRecursos()->size(); i++){
+        int num=0;
+        while(num<i) {
+            num++;
+            it++;
         }
-        else
-            output << "F " << p->recursos->at(i)->getNome() << " " << getCustoDiario() << "\n";
+        Pessoa* pers = dynamic_cast<Pessoa*>(*it);
+        if(pers!=NULL) { /**Não é pessoa**/
+            output << "P " << pers->getNome() << " ";
+            if (pers->recebeValorPadrao())
+                output << pers->getValorPorHoraPadrao();
+            else
+                output << pers->getValorPorHora();
+            output << " " << pers->getHorasDiarias() << "\n";
+        }
+        else {
+            Ferramenta* ferra = dynamic_cast<Ferramenta*>((*it));
+            output << "F " << ferra->getNome() << " " << ferra->getCustoDiario() << "\n";
+        }
     }
-    output << p->atividades->size() << "\n";
-    for (unsigned j=0; j > p->atividades->size(); j++){
-        if(!p->atividades->at(i)->ehPrazoFixo()){ //ATIVIDADE DE ESFORÇO FIXO
-            output << "E " << p->atividades->at(i)->getNome() << " " << p->atividades->at(i)->getHorasNecessarias();
-            if (p->atividades->at(i)->estaTerminada())
-                output << " T " << p->atividades->at(i)->getDuracao() << "\n";
+    /**********/
+    output << p->getAtividades()->size() << "\n";
+    for (int i=0; i < p->getAtividades()->size(); i++){
+        AtividadeDeEsforcoFixo* jagunco = dynamic_cast<AtividadeDeEsforcoFixo*>(p->getAtividades()->at(i));
+        if(jagunco!=NULL){ //Se for Atividade de Esforço Fixo
+            output << "E " << jagunco->getNome() << " " << jagunco->getHorasNecessarias();
+            if (jagunco->estaTerminada())
+                output << " T " << jagunco->getDuracao() << "\n";
             else
                 output << " N \n";
         }
         else{ // ATIVIDADE DE PRAZO FIXO
-            output << "P " << p->atividades->at(i)->getNome() << " " << p->atividades->at(i)->getPrazo();
-            if (p->atividades->at(i)->estaTerminada())
-                output << " T " << p->atividades->at(i)->getDuracao() << "\n";
+            AtividadeDePrazoFixo* jagunco = dynamic_cast<AtividadeDePrazoFixo*>(p->getAtividades()->at(i));
+            output << "P " << jagunco->getNome() << " " << jagunco->getPrazo();
+            if (jagunco->estaTerminada())
+                output << " T " << jagunco->getDuracao() << "\n";
             else
                 output << " N \n";
         }
-        for (j=0; j > p->atividades->at(i)->getQuantidadeDeRecursos(); j++)
-            output << p->atividades->at(i)->getRecursos()->at(j)->getNome() << " ";
+        for (unsigned int j=0; j < jagunco->getQuantidadeDeRecursos(); j++)
+            output << jagunco->getRecursos()[j]->getNome() << " ";
         output << "\n";
     }
     output << "\n";

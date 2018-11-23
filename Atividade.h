@@ -34,7 +34,6 @@ protected:
     Recurso* recursos[MAX_RECURSOS];
     int quantidadeDeRecursos;
     bool terminada;
-    virtual bool ehPrazoFixo() = 0;
 
 };
 

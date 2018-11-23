@@ -1,3 +1,6 @@
+#ifndef PESSOA_H
+#define PESSOA_H
+
 #include "Recurso.h"
 
 using namespace std;
@@ -7,9 +10,8 @@ class Pessoa : public Recurso{
 private:
     double valorPorHora;
     int horasDiarias;
-    static double valorPorHoraPadrao = 10;
+    static double valorPorHoraPadrao;
     bool recebePadrao;
-    bool ehPessoa();
 
 public:
     Pessoa(string nome, double valorPorHora, int horasDiarias);
@@ -23,6 +25,9 @@ public:
     static void setValorPorHoraPadrao(double valor);
     static double getValorPorHoraPadrao();
 
-    double getCusto();
     virtual void imprimir();
+
+    virtual double getCusto(int dias);
 };
+
+#endif

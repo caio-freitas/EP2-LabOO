@@ -1,5 +1,7 @@
 #include "Pessoa.h"
 
+double Pessoa::valorPorHoraPadrao = 10;
+
 Pessoa::Pessoa(string nome, double valorPorHora, int horasDiarias):
   Recurso(nome), horasDiarias(horasDiarias){
       if(valorPorHora<=0||horasDiarias<=0) {
@@ -7,14 +9,15 @@ Pessoa::Pessoa(string nome, double valorPorHora, int horasDiarias):
         /**
         Precisamos de um Catch na função main
                                             **/
+        Pessoa::valorPorHoraPadrao = 10;
       }
       this->recebePadrao = false;
 }
 
 Pessoa::Pessoa(string nome, int horasDiarias):
-    nome(nome), horasDiarias(horasDiarias)
+    Recurso(nome), horasDiarias(horasDiarias)
 {
-    this->valorPorHora = valorPorHoraPadrao;
+    this->valorPorHora = Pessoa::valorPorHoraPadrao;
     this->recebePadrao = true;
 }
 
@@ -22,14 +25,11 @@ Pessoa::~Pessoa(){
     cout << "Pessoa" << nome << "apagada" << endl;
 }
 
-string Pessoa::getNome(){
-    return nome;
-}
 
 double Pessoa::getValorPorHora(){
     if(recebePadrao){
-        if(valorPorHora != Pessoa::valorPorHoraPadrao)
-            valorPorHora = valorPorHoraPadrao
+        if(valorPorHora != getValorPorHoraPadrao())
+            valorPorHora = getValorPorHoraPadrao();
         return valorPorHoraPadrao;
     }
     else
@@ -43,7 +43,7 @@ int Pessoa::getHorasDiarias(){
 double Pessoa::getCusto(int dias){
     if (dias <= 0)
         throw new invalid_argument("dias menor ou igual a 0");
-    return this->horasDiarias * this->valorPorHora * this->dias;
+    return this->horasDiarias * this->valorPorHora * dias;
 }
 
 void Pessoa::imprimir(){
@@ -64,7 +64,7 @@ void Pessoa::setValorPorHoraPadrao(double valor)
     }
 
     else {
-        throw new invalid_argument("O valor por hora padrao deve ser um numero positivo")
+        throw new invalid_argument("O valor por hora padrao deve ser um numero positivo");
     /** Precisamos de um Catch na funcao main **/
     }
 }
@@ -72,10 +72,6 @@ void Pessoa::setValorPorHoraPadrao(double valor)
 double Pessoa::getValorPorHoraPadrao()
 {
     return Pessoa::valorPorHoraPadrao;
-}
-bool Pessoa::ehPessoa()
-{
-    return true;
 }
 
 

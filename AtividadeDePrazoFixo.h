@@ -12,7 +12,7 @@ public:
     virtual int getPrazo();
 
 protected:
-    virtual bool ehPrazoFixo();
+    int dias;
 };
 
 #endif // ATIVIDADEDEPRAZOFIXO_H

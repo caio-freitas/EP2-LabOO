@@ -9,12 +9,8 @@ AtividadeDePrazoFixo::~AtividadeDePrazoFixo(){
     cout << "deletado" << endl;
 }
 
-int AtividadeDePrazoFixo::getCusto(){
-
-}
-
 int AtividadeDePrazoFixo::getDuracao(){
-    if (terminado)
+    if (estaTerminada())
         return duracaoReal;
     else
         return dias;
@@ -22,8 +18,4 @@ int AtividadeDePrazoFixo::getDuracao(){
 
 int AtividadeDePrazoFixo::getPrazo(){ // NÃO SEI DIFERENCIAR DE getDuracao
         return dias;
-}
-
-bool AtividadeDePrazoFixo::ehPrazoFixo(){
-    return true
 }

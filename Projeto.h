@@ -2,6 +2,9 @@
 #define PROJETO_H
 #include <string>
 #include <iostream>
+#include <vector>
+#include <list>
+#include "Recurso.h"
 #include "Atividade.h"
 
 using namespace std;
@@ -25,7 +28,7 @@ public:
 
 protected:
     vector<Atividade*>* atividades = new vector<Atividade*>();
-    list<Recursos*>* recursos = new list<Recurso*>();
+    list<Recurso*>* recursos = new list<Recurso*>();
     string nome;
     bool terminadas;
 };

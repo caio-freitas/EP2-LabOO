@@ -1,13 +1,15 @@
+#ifndef RECURSO_H
+#define RECURSO_H
 #include <stdexcept>
 #include <iostream>
 #include <string.h>
+
 
 using namespace std;
 
 class Recurso {
 protected:
     string nome;
-    virtual bool ehPessoa()=0;
 
 public:
     Recurso(string nome);
@@ -17,3 +19,5 @@ public:
     virtual double getCusto(int dias)=0;
     virtual void imprimir()=0;
 };
+
+#endif

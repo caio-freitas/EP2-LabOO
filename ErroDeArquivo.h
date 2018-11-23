@@ -10,7 +10,7 @@ class ErroDeArquivo : public logic_error
 {
     public:
         ErroDeArquivo(string mensagem);
-        virtual ~ErroDeArquivo();
+        virtual ~ErroDeArquivo() throw();
 
     protected:
         string mensagem;

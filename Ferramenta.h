@@ -1,3 +1,6 @@
+#ifndef FERRAMENTA_H
+#define FERRAMENTA_H
+
 #include "Recurso.h"
 
 using namespace std;
@@ -5,8 +8,6 @@ using namespace std;
 class Ferramenta : public Recurso{
 private:
     double custoDiario;
-    bool ehPessoa();
-    virtual bool ehPessoa();
 
 public:
     Ferramenta(string nome, double custoDiario);
@@ -16,3 +17,5 @@ public:
     virtual void imprimir();
     double getCusto(int dias);
 };
+
+#endif

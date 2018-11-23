@@ -1,14 +1,90 @@
 # depslib dependency file v1.0
-1542906052 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.cpp
+1542998951 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.cpp
 	"Atividade.h"
 
-1542906043 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.h
+1542998776 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividade.h
 	<string>
 	<iostream>
 	"Recurso.h"
 
-1542906096 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\recurso.h
+1543013843 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\recurso.h
 	<stdexcept>
 	<iostream>
 	<string.h>
+
+1543013036 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\pessoa.h
+	"Recurso.h"
+
+1543010743 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividadedeesforcofixo.cpp
+	"AtividadeDeEsforcoFixo.h"
+	"Recurso.h"
+	"Pessoa.h"
+
+1542996749 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividadedeesforcofixo.h
+	"Atividade.h"
+
+1542996839 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividadedeprazofixo.cpp
+	"AtividadeDePrazoFixo.h"
+
+1542996839 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\atividadedeprazofixo.h
+	"Atividade.h"
+
+1542997481 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\errodearquivo.cpp
+	"ErroDeArquivo.h"
+
+1542997474 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\errodearquivo.h
+	<stdexcept>
+	<string>
+
+1542997309 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\ferramenta.cpp
+	"Ferramenta.h"
+
+1542996742 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\ferramenta.h
+	"Recurso.h"
+
+1543003996 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\main.cpp
+	<iostream>
+	<iterator>
+	"Projeto.h"
+	"Recurso.h"
+	"Pessoa.h"
+	"Ferramenta.h"
+	"Atividade.h"
+	"AtividadeDeEsforcoFixo.h"
+	"AtividadeDePrazoFixo.h"
+	"PersistenciaDeProjeto.h"
+
+1542997636 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\projeto.h
+	<string>
+	<iostream>
+	<vector>
+	<list>
+	"Recurso.h"
+	"Atividade.h"
+
+1543005194 c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\persistenciadeprojeto.h
+	<fstream>
+	<iostream>
+	"Projeto.h"
+	"ErroDeArquivo.h"
+	"Ferramenta.h"
+	"Pessoa.h"
+	"Atividade.h"
+	"AtividadeDeEsforcoFixo.h"
+	"AtividadeDePrazoFixo.h"
+	"Recurso.h"
+
+1543012827 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\persistenciadeprojeto.cpp
+	"PersistenciaDeProjeto.h"
+	<algorithm>
+
+1543013949 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\pessoa.cpp
+	"Pessoa.h"
+
+1543013758 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\projeto.cpp
+	"Projeto.h"
+
+1542997870 source:c:\users\vinic\desktop\zootecniaaplicadaanegocios-master\recurso.cpp
+	"Recurso.h"
+	"Pessoa.h"
 
