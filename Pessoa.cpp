@@ -9,7 +9,7 @@ Pessoa::Pessoa(string nome, double valorPorHora, int horasDiarias):
         /**
         Precisamos de um Catch na função main
                                             **/
-        Pessoa::valorPorHoraPadrao = 10;
+
       }
       this->recebePadrao = false;
 }

@@ -27,6 +27,8 @@ void Projeto::adicionar(Recurso* r)
     while(i != this->getRecursos()->end()) {
         if((*i)==r)
             achou = true;
+        i++;
+
     }
     if(achou)
         throw new invalid_argument("Nao foi possivel adicionar recurso");
